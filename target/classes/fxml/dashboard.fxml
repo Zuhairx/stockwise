@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+       xmlns:fx="http://javafx.com/fxml"
+       fx:controller="com.stockwise.controller.DashboardController"
+       styleClass="dashboard-root">
+
+
+       <top>
+              <HBox alignment="CENTER_LEFT"
+                     spacing="10"
+                     styleClass="top-bar">
+
+                     <Label text="StockWise"
+                            styleClass="top-bar-title" />
+
+                     <Label text="Dashboard"
+                            styleClass="top-bar-subtitle" />
+
+                     <Region HBox.hgrow="ALWAYS" />
+
+                     <ImageView fitWidth="80"
+                            fitHeight="80"
+                            preserveRatio="true"
+                     >
+                            <image>
+                                   <Image url="@../images/iconLogo2.png" />
+                            </image>
+                     </ImageView>
+              </HBox>
+       </top>
+
+
+       <left>
+              <VBox spacing="12"
+                     styleClass="side-menu">
+
+                     <Label text="MENU"
+                            styleClass="menu-title" />
+
+                     <Button fx:id="productMenu"
+                            text="Products"
+                            onAction="#goToProduct"
+                            styleClass="menu-button" />
+
+                     <Button text="Transactions"
+                            onAction="#goToTransaction"
+                            styleClass="menu-button" />
+
+                     <Region VBox.vgrow="ALWAYS" />
+
+                     <Button text="Logout"
+                            onAction="#logout"
+                            styleClass="logout-button" />
+              </VBox>
+       </left>
+
+       <center>
+              <VBox spacing="15"
+                     styleClass="content-area">
+
+                     <Label text="Welcome to StockWise!"
+                            styleClass="content-title" />
+
+                     <Label text="Inventory Management System"
+                            styleClass="content-subtitle" />
+
+
+                     <HBox spacing="15">
+
+                            <VBox styleClass="stat-card">
+                                   <Label text="Products"
+                                          styleClass="stat-title" />
+                                   <Label fx:id="productCountLabel"
+                                          text="128"
+                                          styleClass="stat-value" />
+                            </VBox>
+
+                            <VBox styleClass="stat-card">
+                                   <Label text="Transactions"
+                                          styleClass="stat-title" />
+                                   <Label fx:id="transactionCountLabel"
+                                          text="45"
+                                          styleClass="stat-value" />
+                            </VBox>
+
+
+                     </HBox>
+
+              </VBox>
+       </center>
+
+</BorderPane>

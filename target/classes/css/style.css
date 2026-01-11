@@ -1,0 +1,440 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    font-family: "Segoe UI";
+}
+
+/* halaman login */
+.login-root {
+    -fx-background-color: #ecf0f1;
+    background-color: #ecf0f1;
+}
+
+.login-card {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-background-radius: 12;
+    border-radius: 12px;
+    -fx-padding: 30;
+    padding: 30px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 15, 0, 0, 5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.login-logo {
+    -fx-padding: 10 0 5 0;
+    padding: 10px 0 5px 0;
+}
+
+.login-title {
+    -fx-font-size: 22;
+    font-size: 22px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-font-size: 12;
+    font-size: 12px;
+    -fx-text-fill: #7f8c8d;
+    color: #7f8c8d;
+}
+
+.button:hover {
+    -fx-background-color: #2563eb;
+    background-color: #2563eb;
+    -fx-text-fill: white;
+    color: white;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+}
+
+.login-field {
+    -fx-pref-width: 260;
+    width: 260px;
+    -fx-padding: 10;
+    padding: 10px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+}
+
+.login-error {
+    -fx-text-fill: red;
+    color: red;
+    -fx-font-size: 11;
+    font-size: 11px;
+}
+
+.login-button {
+    -fx-pref-width: 260;
+    width: 260px;
+    -fx-padding: 10;
+    padding: 10px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-background-color: #1F4E79;
+    background-color: #1F4E79;
+    -fx-text-fill: white;
+    color: white;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    -fx-background-color: #2563eb;
+    background-color: #2563eb;
+}
+
+/* halaman register */
+.register-button {
+    -fx-pref-width: 260;
+    width: 260px;
+    -fx-padding: 10;
+    padding: 10px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-background-color: #eaeaea;
+    background-color: #eaeaea;
+    -fx-text-fill: rgb(12, 12, 12);
+    color: white;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-cursor: hand;
+    cursor: pointer;
+    -fx-border-color: #1F4E79;
+    -fx-border-width: 2px;
+    -fx-border-style: solid;
+    -fx-border-radius: 6;
+}
+
+.register-button:hover {
+    -fx-background-color: #2563eb;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.role-field {
+    -fx-pref-width: 110;
+    width: 100px;
+    -fx-padding: 2;
+    padding: 4px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+}
+
+.register-error {
+    -fx-text-fill: red;
+    color: red;
+    -fx-font-size: 11;
+    font-size: 11px;
+}
+
+.register-success {
+    -fx-text-fill: rgb(0, 255, 76);
+    color: rgb(0, 255, 60);
+    -fx-font-size: 11;
+    font-size: 11px;
+}
+
+
+/* halaman dashboard */
+.dashboard-root {
+    -fx-font-family: "Segoe UI";
+    font-family: "Segoe UI";
+    -fx-background-color: #ecf0f1;
+    background-color: #ecf0f1;
+}
+
+.top-bar {
+    -fx-background-color: #1F4E79;
+    background-color: #1F4E79;
+    -fx-padding: 0 20;
+    padding: 0 20px;
+}
+
+.top-bar-title {
+    -fx-text-fill: white;
+    color: white;
+    -fx-font-size: 18;
+    font-size: 18px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+
+.top-bar-subtitle {
+    -fx-text-fill: #dbeafe;
+    color: #dbeafe;
+    -fx-font-size: 14;
+    font-size: 14px;
+}
+
+.side-menu {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-padding: 20 15;
+    padding: 20px 15px;
+    -fx-pref-width: 180;
+    width: 180px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 3, 0);
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-title {
+    -fx-font-size: 11;
+    font-size: 11px;
+    -fx-text-fill: #7f8c8d;
+    color: #7f8c8d;
+    -fx-padding: 0 0 10 0;
+    padding: 0 0 10px 0;
+}
+
+.menu-button {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-text-fill: #2c3e50;
+    color: #2c3e50;
+    -fx-pref-width: 150;
+    width: 150px;
+    -fx-alignment: CENTER_LEFT;
+    text-align: left;
+    -fx-padding: 8 10;
+    padding: 8px 10px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    -fx-background-color: #2563eb;
+    background-color: #2563eb;
+}
+
+.logout-button {
+    -fx-background-color: #fee2e2;
+    background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    color: #b91c1c;
+    -fx-pref-width: 150;
+    width: 150px;
+    -fx-padding: 8;
+    padding: 8px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    -fx-background-color: #b91c1c;
+    background-color: #b91c1c;
+    -fx-text-fill: #fee2e2;
+    color: #fee2e2;
+}
+
+.content-area {
+    -fx-padding: 25;
+    padding: 25px;
+}
+
+.content-title {
+    -fx-font-size: 20;
+    font-size: 20px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.content-subtitle {
+    -fx-text-fill: #6b7280;
+    color: #6b7280;
+}
+
+.stat-card {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-padding: 20;
+    padding: 20px;
+    -fx-pref-width: 150;
+    width: 150px;
+    -fx-background-radius: 10;
+    border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0, 0, 4);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stat-card:hover {
+    -fx-scale-x: 1.0 alignment="CENTER" 5;
+    -fx-scale-y: 1.05;
+    transform: scale(1.0, 1.05);
+}
+
+.stat-title {
+    -fx-text-fill: #6b7280;
+    color: #6b7280;
+    -fx-font-size: 12;
+    font-size: 12px;
+}
+
+.stat-value {
+    -fx-font-size: 22;
+    font-size: 22px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.stat-value.warning {
+    -fx-text-fill: #dc2626;
+    color: #dc2626;
+}
+
+/* halaman product & transaction*/
+.menu-root {
+    -fx-background-color: #ecf0f1;
+    background-color: #ecf0f1;
+    -fx-padding: 20;
+    padding: 20px;
+    -fx-font-family: "Segoe UI";
+    font-family: "Segoe UI";
+}
+
+.card {
+    -fx-background-color: white;
+    background-color: white;
+    -fx-background-radius: 12;
+    border-radius: 12px;
+    -fx-padding: 20;
+    padding: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.12), 12, 0, 0, 4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.section-title {
+    -fx-font-size: 16;
+    font-size: 16px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+}
+
+.input {
+    -fx-padding: 10;
+    padding: 10px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+}
+
+.primary-button {
+    -fx-background-color: #c4dbf2;
+    background-color: #c4dbf2;
+    -fx-text-fill: rgb(7, 95, 189);
+    color: rgb(7, 95, 189);
+    -fx-padding: 10 15;
+    padding: 10px 15px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    -fx-background-color: #2563eb;
+    background-color: #2563eb;
+}
+
+.secondary-button {
+    -fx-background-color: #c2fbdc;
+    background-color: #c2fbdc;
+    -fx-text-fill: #1eb656;
+    color: #1eb656;
+    -fx-padding: 10 15;
+    padding: 10px 15px;
+    -fx-font-weight: bold;
+    font-weight: bold;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    -fx-background-color: #169d35;
+    background-color: #169d35;
+    -fx-text-fill: white;
+    color: white;
+}
+
+.danger-button {
+    -fx-background-color: #fee2e2;
+    background-color: #fee2e2;
+    -fx-text-fill: #b91c1c;
+    color: #b91c1c;
+    -fx-padding: 8 15;
+    padding: 8px 15px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    -fx-background-color: #e80d0d;
+    background-color: #e80d0d;
+    -fx-text-fill: white;
+    color: white;
+}
+
+.clear-button {
+    -fx-background-color: #ffd5ac;
+    background-color: #ffd5ac;
+    -fx-text-fill: #e77e0e;
+    color: #e77e0e;
+    -fx-padding: 8 15;
+    padding: 8px 15px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+}
+
+.clear-button:hover {
+    -fx-background-color: #e85d0d;
+    background-color: #e85d0d;
+    -fx-text-fill: white;
+    color: white;
+}
+
+
+.table-view {
+    -fx-background-radius: 8;
+    border-radius: 8px;
+    -fx-border-radius: 8;
+    border-radius: 8px;
+}
+
+
+.text-field {
+    -fx-background-radius: 6;
+    border-radius: 6px;
+}
+
+.back-button:hover {
+    -fx-background-color: transparent;
+    background-color: transparent;
+    -fx-font-size: 14;
+    font-size: 14px;
+    -fx-text-fill: #2c3e50;
+    color: #2c3e50;
+}
+
+.exportCSV:hover {
+    -fx-background-color: green;
+    background-color: green;
+}
+
+.delete-button:hover {
+    -fx-background-color: red;
+    background-color: red;
+}

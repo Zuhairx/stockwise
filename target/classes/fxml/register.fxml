@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ChoiceBox?>
+
+<AnchorPane prefWidth="420" prefHeight="600"
+       xmlns="http://javafx.com/javafx"
+       xmlns:fx="http://javafx.com/fxml"
+       fx:controller="com.stockwise.controller.RegisterController"
+       styleClass="login-root">
+
+       <VBox spacing="15"
+              alignment="CENTER"
+              AnchorPane.topAnchor="30"
+              AnchorPane.bottomAnchor="30"
+              AnchorPane.leftAnchor="40"
+              AnchorPane.rightAnchor="40"
+              styleClass="login-card">
+
+              <ImageView fitWidth="120"
+                     fitHeight="120"
+                     preserveRatio="true"
+                     styleClass="login-logo">
+                     <image>
+                            <Image url="@../images/iconAplikasi.png" />
+                     </image>
+              </ImageView>
+
+              <Label text="StockWise" styleClass="login-title" />
+
+              <Label text="Create New Account"
+                     styleClass="login-subtitle" />
+
+              <TextField fx:id="usernameField"
+                     promptText="Enter username"
+                     styleClass="login-field" />
+
+              <PasswordField fx:id="passwordField"
+                     promptText="Enter password"
+                     styleClass="login-field" />
+
+              <PasswordField fx:id="confirmPasswordField"
+                     promptText="Confirm password"
+                     styleClass="login-field" />
+                     
+              <HBox alignment="CENTER_LEFT">
+                     <ComboBox fx:id="roleChoiceBox"
+                               promptText="Select-Role"
+                               styleClass="role-field"
+                               />
+              </HBox>
+
+              <Label fx:id="statusLabel"
+                     wrapText="true" />
+
+              <Button text="REGISTER"
+                     onAction="#handleRegister"
+                     styleClass="login-button" />
+
+              <Button text="Back to Login"
+                     onAction="#handleBackToLogin"
+                     styleClass="register-button" />
+
+       </VBox>
+
+</AnchorPane>

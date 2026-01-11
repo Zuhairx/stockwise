@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<HBox xmlns="http://javafx.com/javafx"
+  xmlns:fx="http://javafx.com/fxml"
+  fx:controller="com.stockwise.controller.HeaderController"
+  alignment="CENTER_LEFT"
+  spacing="10"
+  style="-fx-padding: 0 10; -fx-background-color: #1f2937;">
+
+  <Button text="← Back to Dashboard" onAction="#handleBack"
+    style=" -fx-background-radius: 6;" />
+  <Label fx:id="titleLabel"
+    text="Title"
+    style="-fx-text-fill: white; -fx-font-size: 16;" />
+
+  <Region HBox.hgrow="ALWAYS" />
+
+  <ImageView fitWidth="60"
+    fitHeight="60"
+    preserveRatio="true"
+  >
+    <image>
+      <Image url="@../images/iconLogo2.png" />
+    </image>
+  </ImageView>
+
+</HBox>

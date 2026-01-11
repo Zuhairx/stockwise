@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane prefWidth="420" prefHeight="520"
+       xmlns="http://javafx.com/javafx"
+       xmlns:fx="http://javafx.com/fxml"
+       fx:controller="com.stockwise.controller.LoginController"
+       styleClass="login-root">
+
+
+       <VBox spacing="15"
+              alignment="CENTER"
+              AnchorPane.topAnchor="60"
+              AnchorPane.bottomAnchor="60"
+              AnchorPane.leftAnchor="40"
+              AnchorPane.rightAnchor="40"
+              styleClass="login-card">
+
+
+              <ImageView fitWidth="120"
+                     fitHeight="120"
+                     preserveRatio="true"
+                     styleClass="login-logo">
+                     <image>
+                            <Image url="@../images/iconAplikasi.png" />
+                     </image>
+              </ImageView>
+
+
+              <Label text="StockWise" styleClass="login-title" />
+
+              <Label text="Inventory Management System"
+                     styleClass="login-subtitle" />
+
+
+              <TextField fx:id="usernameField"
+                     promptText="Username"
+                     styleClass="login-field" />
+
+
+              <PasswordField fx:id="passwordField"
+                     promptText="Password"
+                     styleClass="login-field" />
+
+
+              <Label fx:id="errorLabel"
+                     styleClass="login-error" />
+
+
+              <Button text="LOGIN"
+                     onAction="#handleLogin"
+                     styleClass="login-button" />
+
+              <Button text="REGISTER"
+                     onAction="#handleRegister"
+                     styleClass="register-button" />
+
+       </VBox>
+
+</AnchorPane>
