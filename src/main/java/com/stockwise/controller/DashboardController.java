@@ -22,10 +22,17 @@ public class DashboardController {
     private Label transactionCountLabel;
 
     @FXML
+    private Label welcomeLabel;
+
+    @FXML
     public void initialize() {
         if (!UserSession.get().getRole().equals("ADMIN")) {
-            productMenu.setDisable(true);
+            productMenu.setVisible(false);
+            productMenu.setManaged(false);
         }
+
+    
+        welcomeLabel.setText("Welcome " + UserSession.get().getUsername() + "!");
 
         ProductService productService = new ProductService();
         TransactionService transactionService = new TransactionService();

@@ -103,15 +103,22 @@
     -fx-cursor: hand;
     cursor: pointer;
     -fx-border-color: #1F4E79;
+    border-color: #1F4E79;
     -fx-border-width: 2px;
+    border-width: 2px;
     -fx-border-style: solid;
+    border-style: solid;
     -fx-border-radius: 6;
+
 }
 
 .register-button:hover {
     -fx-background-color: #2563eb;
+    background-color: #2563eb;
     -fx-border-color: transparent;
+    border-color: transparent;
     -fx-border-width: 0;
+    border-width: 0;
 }
 
 .role-field {

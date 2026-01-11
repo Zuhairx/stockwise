@@ -65,7 +65,7 @@
               <VBox spacing="15"
                      styleClass="content-area">
 
-                     <Label text="Welcome to StockWise!"
+                     <Label fx:id="welcomeLabel" text="Welcome to StockWise!"
                             styleClass="content-title" />
 
                      <Label text="Inventory Management System"
