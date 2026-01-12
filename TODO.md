@@ -2,3 +2,4 @@
 - [x] Modify deleteTransaction method in TransactionService.java to reverse stock changes before deleting the transaction
 - [x] Update TransactionController to refresh product list after deletion to reflect stock changes
 - [x] Test the fix by compiling the application and verifying no compilation errors
+- [x] Fix calculation error in CSV import for updating transactions: check if transaction exists, revert old stock change, apply new one, warn if qty unchanged

@@ -1,6 +1,7 @@
 package com.stockwise.util;
 
 import com.stockwise.model.Product;
+import com.stockwise.model.Transaction;
 import com.stockwise.repository.ProductRepository;
 import com.stockwise.repository.TransactionRepository;
 
@@ -57,11 +58,31 @@ public class CSVImporter {
                 // Find product by name
                 Product product = productRepo.findByName(productName);
                 if (product != null) {
-                    repo.insertOrUpdateWithId(id, product.getId(), type, qty, date);
-                    // Update product stock
-                    int currentStock = product.getStock();
-                    int newStock = type.equals("IN") ? currentStock + qty : currentStock - qty;
-                    productRepo.updateStock(product.getId(), newStock);
+                    // Check if transaction exists
+                    Transaction existingTransaction = repo.findById(id);
+                    if (existingTransaction != null) {
+                        // Transaction exists, check if qty is the same
+                        if (existingTransaction.getQuantity() == qty) {
+                            throw new Exception("Stock is still the same for transaction ID: " + id);
+                        }
+                        // Revert old stock change
+                        int currentStock = product.getStock();
+                        int revertStock = existingTransaction.getType().equals("IN") ? currentStock - existingTransaction.getQuantity() : currentStock + existingTransaction.getQuantity();
+                        productRepo.updateStock(product.getId(), revertStock);
+                        // Update transaction
+                        repo.insertOrUpdateWithId(id, product.getId(), type, qty, date);
+                        // Apply new stock change
+                        currentStock = revertStock;
+                        int newStock = type.equals("IN") ? currentStock + qty : currentStock - qty;
+                        productRepo.updateStock(product.getId(), newStock);
+                    } else {
+                        // New transaction
+                        repo.insertOrUpdateWithId(id, product.getId(), type, qty, date);
+                        // Update product stock
+                        int currentStock = product.getStock();
+                        int newStock = type.equals("IN") ? currentStock + qty : currentStock - qty;
+                        productRepo.updateStock(product.getId(), newStock);
+                    }
                 } else {
                     throw new Exception("Product not found: " + productName);
                 }
