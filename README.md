@@ -18,7 +18,7 @@
 
 ### 3. Menjalankan Aplikasi
 - **Via Batch File**: Jalankan `run.bat` (untuk Windows)
-- **Via Command Line**: `java --module-path target\lib --add-modules javafx.controls,javafx.fxml -jar target\stockwise-1.0-SNAPSHOT.jar`
+- **Via Terminal**: `mvn clean install mvn clean javafx:run`
 - **Via Maven**: `mvn clean compile exec:java`
 
 ## Panduan Penggunaan
@@ -38,75 +38,84 @@
 3. Pilih role (ADMIN atau STAFF)
 4. Klik "Register"
 
-<img width="675" height="383" alt="image" src="https://github.com/user-attachments/assets/1b6ace6b-f031-4eec-8234-8b5d32e403c0" />
+<img width="670" height="442" alt="image" src="https://github.com/user-attachments/assets/0b637ffe-6ef5-4ab8-b498-b96bfa7f840c" />
+
 
 ### Dashboard
 Setelah login, Anda akan melihat dashboard dengan:
 - Ringkasan total produk
-- Ringkasan transaksi terbaru
+- Ringkasan total transaksi
 - Navigasi ke menu lainnya
 
-<img width="906" height="1023" alt="image" src="https://github.com/user-attachments/assets/baccf035-327d-4200-abd1-0b89bc1e01b7" />
+<img width="902" height="1026" alt="image" src="https://github.com/user-attachments/assets/4db2e9b6-84f6-401a-8e06-1e9429658833" />
 
 ### Manajemen Produk
 1. Klik menu "Products" di header
 2. **Tambah Produk Baru**:
-   - Klik "Add Product"
    - Isi Product Name, Category, Price
    - Klik "Add"
 3. **Edit Produk**:
    - Pilih produk dari tabel
    - Ubah data yang diperlukan
    - Klik "Update"
-4. **Hapus Produk**:
+4. **Lihat Riwayat Product**:
+   - Semua product akan ditampilkan dalam tabel
+5. **Hapus Produk**:
    - Pilih produk dari tabel
    - Klik "Delete Selected"
-4. **Hapus Semua Produk**:
+6. **Hapus Semua Produk**:
    - Pilih produk dari tabel
    - Klik "Delete All"
    - Konfirmasi penghapusan
-5. **Import CSV**:
+7. **Import CSV**:
    - Klik "Import CSV"
-   - Pilih file CSV yang berisi data produk
+   - Pilih file CSV yang berisi template data produk
    - Data akan diimpor dan diperbarui jika produk sudah ada
-6. **Export CSV**:
+8. **Export CSV**:
    - Klik "Export CSV"
    - Pilih lokasi penyimpanan file
 
-<img width="1045" height="1000" alt="image" src="https://github.com/user-attachments/assets/898232d1-f1c4-4d23-aaa7-614204d1c19f" />
+notes: **tombol clear field -> untuk menghapus semua teks field yang ada
+
+<img width="1043" height="1020" alt="image" src="https://github.com/user-attachments/assets/8e18fc6a-b18e-4d80-a102-62ec32bbddd2" />
 
 ### Manajemen Transaksi
 1. Klik menu "Transactions" di header
 2. **Tambah Transaksi**:
-   - Klik "Add Transaction"
    - Pilih Product Name
    - Pilih Type (IN untuk masuk, OUT untuk keluar)
    - Masukkan Quantity
-   - Klik "Submit"
-3. **Lihat Riwayat Transaksi**:
+   - Klik "Add"
+3. **Edit Transaksi**:
+   - Pilih transaksi dari tabel
+   - Ubah data yang diperlukan
+   - Klik "Update"
+4. **Lihat Riwayat Transaksi**:
    - Semua transaksi akan ditampilkan dalam tabel
-4. **Hapus transaksi**:
+5. **Hapus transaksi**:
    - Pilih transaksi dari tabel
    - Klik "Delete Selected"
-4. **Hapus Semua transaksi**:
+6. **Hapus Semua transaksi**:
    - Pilih transaksi dari tabel
    - Klik "Delete All"
    - Konfirmasi penghapusan
    - **Catatan**: Menghapus semua transaksi akan mereset stok semua produk menjadi 0
-5. **Import CSV**:
+7. **Import CSV**:
    - Klik "Import CSV"
-   - Pilih file CSV yang berisi data transaksi
+   - Pilih file CSV yang berisi data template transaksi
    - Data akan diimpor dan diperbarui jika transaksi sudah ada
-6. **Export CSV**:
+8. **Export CSV**:
    - Klik "Export CSV"
    - Pilih lokasi penyimpanan file
 
-
+<img width="1048" height="910" alt="image" src="https://github.com/user-attachments/assets/e3cdb879-862f-4a3a-8f40-e60508efe57b" />
 
 ### Manajemen Pengguna (khusus ADMIN) 
 1. Klik menu "Users" di Dashboard (jika role ADMIN)
-2. Lihat daftar pengguna
-3. Edit username & role pengguna jika diperlukan
+2. Lihat tabel daftar pengguna 
+3. Edit username & role pengguna jika diperlukan dari dalam tabel
+4. klik "refresh" jika data pengguna belum terupdate
+5. klik "Delete" untuk mengahapus pengguna
 
 ## Struktur Database
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/ef2e0c18-46aa-4b9f-b407-1f5bdec9446b" />
