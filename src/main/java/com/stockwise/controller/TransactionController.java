@@ -39,6 +39,9 @@ public class TransactionController implements Initializable {
     private TextField qtyField;
 
     @FXML
+    private TextField searchfield;
+
+    @FXML
     private TableView<Transaction> tableView;
     @FXML
     private TableColumn<Transaction, Integer> noCol;
@@ -140,7 +143,7 @@ public class TransactionController implements Initializable {
         productCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         qtyCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("formattedDate"));
 
         noCol.setStyle("-fx-alignment: CENTER;");
         t_idCol.setStyle("-fx-alignment: CENTER;");
@@ -160,8 +163,29 @@ public class TransactionController implements Initializable {
         masterData = FXCollections.observableArrayList();
         tableView.setItems(masterData);
 
-        loadTable();
+        searchfield.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText == null || newText.trim().isEmpty()) {
+                tableView.setItems(masterData);
+            } else {
+                List<Transaction> filteredList = transactionService.searchTransactions(newText.trim());
+                tableView.setItems(FXCollections.observableArrayList(filteredList));
+            }
+        });
 
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+
+                Product selectedProduct = productBox.getItems().stream()
+                        .filter(p -> p.getId().equals(newSelection.getProductId()))
+                        .findFirst()
+                        .orElse(null);
+                productBox.setValue(selectedProduct);
+                typeBox.setValue(newSelection.getType());
+                qtyField.setText(String.valueOf(newSelection.getQuantity()));
+            }
+        });
+
+        loadTable();
     }
 
     private void loadTable() {
@@ -174,10 +198,8 @@ public class TransactionController implements Initializable {
         Product product = productBox.getValue();
         String type = typeBox.getValue();
 
-        if (product == null || type == null) {
-            showAlert("Error", "Please complete the form");
+        if (!isValidInput())
             return;
-        }
 
         int qty;
         try {
@@ -201,6 +223,39 @@ public class TransactionController implements Initializable {
         typeBox.setValue(null);
         qtyField.clear();
 
+    }
+
+    @FXML
+    private void handleUpdate2() {
+        Transaction selected = tableView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            showAlert("Error", "Select a Transaction first");
+            return;
+        }
+
+        if (!isValidInput())
+            return;
+
+        Product newProduct = productBox.getValue();
+        String newType = typeBox.getValue();
+        int newQty;
+        try {
+            newQty = Integer.parseInt(qtyField.getText());
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Quantity must be numeric!");
+            return;
+        }
+
+        if (!transactionService.updateTransaction(selected.getId(), newProduct.getId(), newType, newQty)) {
+            showAlert("Error", "Failed to update transaction. Check stock levels.");
+            return;
+        }
+
+        loadTable();
+        tableView.refresh();
+        productBox.setValue(null);
+        typeBox.setValue(null);
+        qtyField.clear();
     }
 
     @FXML
@@ -240,16 +295,6 @@ public class TransactionController implements Initializable {
         });
     }
 
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        ((Stage) alert.getDialogPane().getScene().getWindow())
-                .getIcons().add(new Image("/images/iconLogo.png"));
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     @FXML
     private void exportCSV2() {
         FileChooser fileChooser = new FileChooser();
@@ -262,11 +307,12 @@ public class TransactionController implements Initializable {
 
         if (selectedFile != null) {
             List<Transaction> transactions = transactionRepo.findAll();
-            CSVExporter.exportTransactions(transactions, selectedFile);
+
             if (transactions.isEmpty()) {
                 showAlert("Info",
                         "No transactions to export. CSV file created with header only: " + selectedFile.getName());
             } else {
+                CSVExporter.exportTransactions(transactions, selectedFile);
                 showAlert("Success", "Transactions exported to " + selectedFile.getName());
             }
         }
@@ -291,6 +337,38 @@ public class TransactionController implements Initializable {
                 showAlert("Error", "Failed to import CSV: " + e.getMessage());
             }
         }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        ((Stage) alert.getDialogPane().getScene().getWindow())
+                .getIcons().add(new Image("/images/iconLogo.png"));
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private boolean isValidInput() {
+        if (productBox.getValue() == null || typeBox.getValue() == null || typeBox.getValue().trim().isEmpty()
+                || qtyField.getText() == null || qtyField.getText().trim().isEmpty()) {
+            showAlert("Validation Error", "All fields must be filled");
+            return false;
+        }
+
+        try {
+            int qty = Integer.parseInt(qtyField.getText());
+
+            if (qty < 0) {
+                showAlert("Validation Error", "quantity must be positive");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Validation Error", "quantity must be numeric");
+            return false;
+        }
+
+        return true;
     }
 
 }

@@ -438,10 +438,10 @@
 
 .CSV-button {
     -fx-background-color: rgb(255, 227, 161);
-    background-color:rgb(255, 227, 161);
-     -fx-text-fill: #fcae13;
+    background-color: rgb(255, 227, 161);
+    -fx-text-fill: #fcae13;
     color: #fcae13;
-     -fx-padding: 10 15;
+    -fx-padding: 10 15;
     padding: 10px 15px;
     -fx-background-radius: 6;
     border-radius: 6px;
@@ -452,11 +452,39 @@
 }
 
 .CSV-button:hover {
-    -fx-background-color:  rgb(195, 137, 0);
-    background-color:rgb(195, 137, 0);
+    -fx-background-color: rgb(195, 137, 0);
+    background-color: rgb(195, 137, 0);
 }
 
 .delete-button:hover {
     -fx-background-color: red;
     background-color: red;
+}
+
+.combo-box {
+    -fx-background-color: rgb(240, 240, 240);
+    background-color: rgb(240, 240, 240);
+    -fx-text-fill: #000000;
+    color: #000000;
+    -fx-padding: 5 5;
+    padding: 5px 5px;
+    -fx-background-radius: 6;
+    border-radius: 6px;
+    -fx-cursor: hand;
+    cursor: pointer;
+    -fx-font-weight: bold;
+    font-weight: bold;
+
+    -fx-border-color: #545454;
+    border-color: #545454;
+    -fx-border-width: 1px;
+    border-width: 1px;
+    -fx-border-style: solid;
+    border-style: solid;
+    -fx-border-radius: 6;
+}
+
+.combo-box:hover {
+    -fx-background-color: rgb(229, 227, 227);
+    background-color: rgb(240, 240, 240);
 }

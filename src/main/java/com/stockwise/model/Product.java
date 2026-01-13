@@ -58,12 +58,6 @@ public class Product {
         return stock;
     }
 
-    private static int nextId = 1;
-
-    public static String generateNextId() {
-        return String.format("PR-%03d", nextId++);
-    }
-
     public static void resetIdCounter() {
         nextId = 1;
     }
@@ -74,6 +68,12 @@ public class Product {
 
     public String getFormattedId() {
         return getId();
+    }
+
+    private static int nextId = 1;
+
+    public static String generateNextId() {
+        return String.format("PR-%03d", nextId++);
     }
 
     public String getFormattedPrice() {

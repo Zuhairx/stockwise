@@ -191,7 +191,7 @@ public class ProductRepository {
             ps.setInt(4, stock);
             ps.setString(5, id);
             ps.executeUpdate();
-            conn.commit(); 
+            conn.commit();
 
         } catch (Exception e) {
             e.printStackTrace();

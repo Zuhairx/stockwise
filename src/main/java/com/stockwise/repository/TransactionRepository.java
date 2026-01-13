@@ -5,6 +5,8 @@ import com.stockwise.util.DBConnection;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,9 @@ public class TransactionRepository {
 
     public void insert(String productId, String type, int qty) {
         String transactionId = generateNextTransactionId();
-        String sql = "INSERT INTO transactions (transaction_id, product_id, type, quantity, transaction_date) VALUES (?, ?, ?, ?, NOW())";
+        ZonedDateTime jakartaNow = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"));
+        LocalDateTime jakartaDate = jakartaNow.toLocalDateTime();
+        String sql = "INSERT INTO transactions (transaction_id, product_id, type, quantity, transaction_date) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -55,11 +59,12 @@ public class TransactionRepository {
             ps.setString(2, productId);
             ps.setString(3, type);
             ps.setInt(4, qty);
+            ps.setTimestamp(5, Timestamp.valueOf(jakartaDate));
             int rowsAffected = ps.executeUpdate();
             conn.commit();
             if (rowsAffected > 0) {
                 System.out.println("Transaction inserted successfully: " + transactionId + ", " + productId + ", "
-                        + type + ", " + qty);
+                        + type + ", " + qty + ", " + jakartaDate);
             } else {
                 System.out.println("Transaction insert failed: no rows affected");
             }
@@ -209,5 +214,43 @@ public class TransactionRepository {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Transaction> searchTransactions(String query) {
+        List<Transaction> list = new ArrayList<>();
+        String sql = """
+                SELECT t.transaction_id, p.product_id, p.product_name, t.type, t.quantity, t.transaction_date
+                FROM transactions t
+                JOIN products p ON t.product_id = p.product_id
+                WHERE t.transaction_id LIKE ? OR p.product_id LIKE ? OR p.product_name LIKE ?
+                ORDER BY t.transaction_date DESC
+                """;
+
+        try (Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            String likeQuery = "%" + query + "%";
+            ps.setString(1, likeQuery);
+            ps.setString(2, likeQuery);
+            ps.setString(3, likeQuery);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Transaction t = new Transaction(
+                            rs.getString("transaction_id"),
+                            rs.getString("product_id"),
+                            rs.getString("product_name"),
+                            rs.getString("type"),
+                            rs.getInt("quantity"),
+                            rs.getTimestamp("transaction_date").toLocalDateTime());
+                    list.add(t);
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error searching transactions: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return list;
     }
 }

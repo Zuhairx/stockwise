@@ -16,6 +16,13 @@ public class TransactionService {
         return transactionRepo.findAll();
     }
 
+    public List<Transaction> searchTransactions(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            return getAllTransactions();
+        }
+        return transactionRepo.searchTransactions(query.trim());
+    }
+
     public boolean process(Product product, String type, int qty) {
 
         int stock = product.getStock();
@@ -47,7 +54,6 @@ public class TransactionService {
                 int quantity = transaction.getQuantity();
                 int newStock;
 
-
                 if ("IN".equals(transaction.getType())) {
                     newStock = currentStock - quantity;
                 } else if ("OUT".equals(transaction.getType())) {
@@ -57,11 +63,9 @@ public class TransactionService {
                     newStock = currentStock;
                 }
 
-              
                 productRepo.updateStock(transaction.getProductId(), newStock);
             }
         }
-
 
         transactionRepo.delete(id);
     }
@@ -69,6 +73,45 @@ public class TransactionService {
     public void deleteAllTransactions() {
         transactionRepo.deleteAll();
         productRepo.resetAllStocksToZero();
+    }
+
+    public boolean updateTransaction(String transactionId, String newProductId, String newType, int newQty) {
+
+        Transaction oldTransaction = transactionRepo.findById(transactionId);
+        if (oldTransaction == null) {
+            return false;
+        }
+
+        Product oldProduct = productRepo.findById(oldTransaction.getProductId());
+        if (oldProduct == null) {
+            return false;
+        }
+
+        Product newProduct = productRepo.findById(newProductId);
+        if (newProduct == null) {
+            return false;
+        }
+
+        int oldStockAdjustment = oldTransaction.getType().equals("IN") ? -oldTransaction.getQuantity()
+                : oldTransaction.getQuantity();
+        int reversedStock = oldProduct.getStock() + oldStockAdjustment;
+        productRepo.updateStock(oldProduct.getId(), reversedStock);
+
+        int currentStockForNew = oldProduct.getId().equals(newProductId) ? reversedStock : newProduct.getStock();
+
+        if (newType.equals("OUT") && newQty > currentStockForNew) {
+
+            productRepo.updateStock(oldProduct.getId(), oldProduct.getStock());
+            return false;
+        }
+
+        int newStockAdjustment = newType.equals("IN") ? newQty : -newQty;
+        int finalNewStock = currentStockForNew + newStockAdjustment;
+        productRepo.updateStock(newProduct.getId(), finalNewStock);
+
+        transactionRepo.insertOrUpdateWithId(transactionId, newProductId, newType, newQty, oldTransaction.getDate());
+
+        return true;
     }
 
 }

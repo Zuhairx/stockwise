@@ -12,16 +12,20 @@ public class CSVExporter {
     public static void exportTransactions(List<Transaction> list, File file) {
         try (FileWriter writer = new FileWriter(file)) {
 
-            writer.write("ID,Product,Type,Qty,Date\n");
+            writer.write(" No,transaction_id,product_id,product_name,type,quantity,transaction_date\n");
 
+            int no = 1;
             for (Transaction t : list) {
                 writer.write(String.format(
-                        "%s,%s,%s,%d,%s\n",
+                        "%d,%s,%s,%s,%s,%d,%s\n",
+                        no,
                         t.getId(),
+                        t.getProductId(),
                         t.getProductName(),
                         t.getType(),
                         t.getQuantity(),
-                        t.getDate()));
+                        t.getFormattedDate()));
+                no++;
             }
 
         } catch (Exception e) {
@@ -32,7 +36,7 @@ public class CSVExporter {
     public static void exportProducts(List<Product> list, File file) {
         try (FileWriter writer = new FileWriter(file)) {
 
-            writer.write("No,Product ID,Category,Product Name,Price,Stock\n");
+            writer.write("No,product_id,product_category,product_name,price,stock\n");
 
             int no = 1;
             for (Product p : list) {

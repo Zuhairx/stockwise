@@ -120,7 +120,9 @@ public class ProductController implements Initializable {
 
         searchField.textProperty().addListener((obs, old, val) -> {
             tableView.setItems(
-                    masterData.filtered(p -> p.getName().toLowerCase().contains(val.toLowerCase())));
+                    masterData.filtered(p -> p.getId().toLowerCase().contains(val.toLowerCase()) ||
+                            p.getName().toLowerCase().contains(val.toLowerCase()) ||
+                            p.getCategory().toLowerCase().contains(val.toLowerCase())));
         });
     }
 
@@ -172,6 +174,7 @@ public class ProductController implements Initializable {
                 categoryField.getText(),
                 Integer.parseInt(priceField.getText()));
         reload();
+        showAlert("Success", "Product has been updated!");
     }
 
     @FXML
@@ -216,8 +219,51 @@ public class ProductController implements Initializable {
         searchField.clear();
     }
 
+    @FXML
+    private void exportCSV1() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save CSV File");
+        fileChooser.setInitialFileName("products.csv");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        Stage stage = (Stage) tableView.getScene().getWindow();
+        File selectedFile = fileChooser.showSaveDialog(stage);
+
+        if (selectedFile != null) {
+            List<Product> products = productRepo.findAll();
+
+            if (products.isEmpty()) {
+                showAlert("Info",
+                        "No products to export. CSV file created with header only: " + selectedFile.getName());
+            } else {
+                CSVExporter.exportProducts(products, selectedFile);
+                showAlert("Success", "Products exported to " + selectedFile.getName());
+            }
+        }
+    }
+
+    @FXML
+    private void importCSV1() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open CSV File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+
+        Stage stage = (Stage) tableView.getScene().getWindow();
+        File selectedFile = fileChooser.showOpenDialog(stage);
+
+        if (selectedFile != null) {
+            try {
+                CSVImporter.importProducts(selectedFile.getAbsolutePath());
+                reload();
+                showAlert("Success", "Products imported successfully from " + selectedFile.getName());
+            } catch (Exception e) {
+                showAlert("Error", "Failed to import products: " + e.getMessage());
+            }
+        }
+    }
+
     private boolean isValidInput() {
-        if (nameField.getText().isEmpty()
+        if (nameField.getText().isEmpty() || categoryField.getText().isEmpty()
                 || priceField.getText().isEmpty()) {
             showAlert("Validation Error", "All fields must be filled");
             return false;
@@ -248,48 +294,6 @@ public class ProductController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
 
-    }
-
-    @FXML
-    private void exportCSV1() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save CSV File");
-        fileChooser.setInitialFileName("products.csv");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-
-        Stage stage = (Stage) tableView.getScene().getWindow();
-        File selectedFile = fileChooser.showSaveDialog(stage);
-
-        if (selectedFile != null) {
-            List<Product> products = productRepo.findAll();
-            if (products.isEmpty()) {
-                showAlert("Info",
-                        "No products to export. CSV file created with header only: " + selectedFile.getName());
-            } else {
-                CSVExporter.exportProducts(products, selectedFile);
-                showAlert("Success", "Products exported to " + selectedFile.getName());
-            }
-        }
-    }
-
-    @FXML
-    private void importCSV1() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open CSV File");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-
-        Stage stage = (Stage) tableView.getScene().getWindow();
-        File selectedFile = fileChooser.showOpenDialog(stage);
-
-        if (selectedFile != null) {
-            try {
-                CSVImporter.importProducts(selectedFile.getAbsolutePath());
-                reload();
-                showAlert("Success", "Products imported successfully from " + selectedFile.getName());
-            } catch (Exception e) {
-                showAlert("Error", "Failed to import products: " + e.getMessage());
-            }
-        }
     }
 
 }

@@ -52,13 +52,13 @@ public class DashboardController {
     }
 
     @FXML
-    private void goToUsers(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/fxml/users.fxml");
+    private void goToTransaction(ActionEvent event) {
+        SceneSwitcher.switchScene(event, "/fxml/transaction.fxml");
     }
 
     @FXML
-    private void goToTransaction(ActionEvent event) {
-        SceneSwitcher.switchScene(event, "/fxml/transaction.fxml");
+    private void goToUsers(ActionEvent event) {
+        SceneSwitcher.switchScene(event, "/fxml/users.fxml");
     }
 
     @FXML

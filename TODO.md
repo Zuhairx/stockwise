@@ -1,2 +1,6 @@
-- [x] Add resetAllStocksToZero method in ProductRepository.java
-- [x] Modify deleteAllTransactions in TransactionService.java to reset all product stocks to 0 after deleting transactions
+# TODO: Implement Product Search by ID, Name, and Category
+
+## Tasks
+- [x] Update prompt text in product.fxml to "Search by ID, Name, or Category..."
+- [x] Modify search filter logic in ProductController.java to include ID, Name, and Category
+- [ ] Test the updated search functionality
