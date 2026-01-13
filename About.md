@@ -1,5 +1,9 @@
 # About StockWise
 
+<div align="center">
+<img width="256" height="256" alt="iconAplikasi" src="https://github.com/user-attachments/assets/22b9557a-f255-467d-96a6-2ad7f1130679" />
+</div>
+
 ## Nama Aplikasi
 StockWise - Inventory Management System
 
