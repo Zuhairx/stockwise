@@ -30,7 +30,7 @@ public class ProductController implements Initializable {
     @FXML
     private TableView<Product> tableView;
     @FXML
-    private TableColumn<Product, Integer> noCol;
+    private TableColumn<Product, Void> noCol;
     @FXML
     private TableColumn<Product, String> idCol;
     @FXML
@@ -77,17 +77,24 @@ public class ProductController implements Initializable {
             });
         });
 
-        noCol.setCellFactory(column -> new TableCell<Product, Integer>() {
+        noCol.setCellFactory(column -> new TableCell<Product, Void>() {
             @Override
-            protected void updateItem(Integer item, boolean empty) {
+            protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
                 } else {
-                    setText(String.valueOf(getIndex() + 1));
+                    try {
+                        String id = getTableRow().getItem().getId();
+                        int num = Integer.parseInt(id.substring(3));
+                        setText(String.valueOf(num));
+                    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                        setText("0");
+                    }
                 }
             }
         });
+        
         idCol.setCellValueFactory(d -> new SimpleStringProperty(d.getValue().getFormattedId()));
         catCol.setCellValueFactory(d -> d.getValue().categoryProperty());
         nameCol.setCellValueFactory(d -> d.getValue().nameProperty());
@@ -119,10 +126,15 @@ public class ProductController implements Initializable {
                 });
 
         searchField.textProperty().addListener((obs, old, val) -> {
-            tableView.setItems(
-                    masterData.filtered(p -> p.getId().toLowerCase().contains(val.toLowerCase()) ||
-                            p.getName().toLowerCase().contains(val.toLowerCase()) ||
-                            p.getCategory().toLowerCase().contains(val.toLowerCase())));
+            if (val == null || val.trim().isEmpty()) {
+                tableView.setItems(masterData);
+            } else {
+                tableView.setItems(
+                        masterData.filtered(p -> p.getId().toLowerCase().contains(val.toLowerCase()) ||
+                                p.getName().toLowerCase().contains(val.toLowerCase()) ||
+                                p.getCategory().toLowerCase().contains(val.toLowerCase())));
+            }
+            Platform.runLater(() -> tableView.refresh());
         });
     }
 

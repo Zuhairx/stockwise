@@ -37,6 +37,12 @@ public class RegisterController {
         String confirmPassword = confirmPasswordField.getText();
         String role = roleChoiceBox.getValue();
 
+        if (role == null) {
+            statusLabel.setText("Please select a role");
+            statusLabel.setStyle("-fx-text-fill: red;");
+            return;
+        }
+
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             statusLabel.setText("Please fill all fields");
             statusLabel.setStyle("-fx-text-fill: red;");

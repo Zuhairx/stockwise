@@ -44,7 +44,7 @@ public class TransactionController implements Initializable {
     @FXML
     private TableView<Transaction> tableView;
     @FXML
-    private TableColumn<Transaction, Integer> noCol;
+    private TableColumn<Transaction, Void> noCol;
     @FXML
     private TableColumn<Transaction, String> t_idCol;
     @FXML
@@ -126,14 +126,20 @@ public class TransactionController implements Initializable {
             }
         });
 
-        noCol.setCellFactory(column -> new TableCell<Transaction, Integer>() {
+        noCol.setCellFactory(column -> new TableCell<Transaction, Void>() {
             @Override
-            protected void updateItem(Integer item, boolean empty) {
+            protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setText(null);
                 } else {
-                    setText(String.valueOf(getIndex() + 1));
+                    try {
+                        String id = getTableRow().getItem().getId();
+                        int num = Integer.parseInt(id.substring(3));
+                        setText(String.valueOf(num));
+                    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+                        setText("0");
+                    }
                 }
             }
         });
@@ -170,6 +176,7 @@ public class TransactionController implements Initializable {
                 List<Transaction> filteredList = transactionService.searchTransactions(newText.trim());
                 tableView.setItems(FXCollections.observableArrayList(filteredList));
             }
+            tableView.refresh();
         });
 
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {

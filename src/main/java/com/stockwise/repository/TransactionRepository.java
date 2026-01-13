@@ -223,7 +223,7 @@ public class TransactionRepository {
                 FROM transactions t
                 JOIN products p ON t.product_id = p.product_id
                 WHERE t.transaction_id LIKE ? OR p.product_id LIKE ? OR p.product_name LIKE ?
-                ORDER BY t.transaction_date DESC
+                ORDER BY t.transaction_date ASC
                 """;
 
         try (Connection conn = DBConnection.getConnection();
