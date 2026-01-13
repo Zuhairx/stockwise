@@ -101,6 +101,13 @@ Setelah login, Anda akan melihat dashboard dengan:
    - Klik "Export CSV"
    - Pilih lokasi penyimpanan file
 
+
+
+### Manajemen Pengguna (khusus ADMIN) 
+1. Klik menu "Users" di Dashboard (jika role ADMIN)
+2. Lihat daftar pengguna
+3. Edit username & role pengguna jika diperlukan
+
 ## Struktur Database
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/ef2e0c18-46aa-4b9f-b407-1f5bdec9446b" />
 
@@ -138,6 +145,13 @@ Setelah login, Anda akan melihat dashboard dengan:
 - Pastikan Java 21 terinstall
 - Pastikan semua dependencies sudah didownload (jalankan `mvn clean install`)
 - Periksa module path untuk JavaFX
+
+### Error Saat Import CSV 
+- Pastikan format CSV Product benar: no, product_id,product_category,product_name,price,stock
+- Pastikan format CSV Transaction benar: no,product_id,product_name,type,quantity,transaction_date
+- Header harus ada di baris pertama
+- Data harus sesuai tipe (price dan stock harus angka)
+
 
 ## Dukungan
 Untuk pertanyaan atau masalah, hubungi developer: ZuhairX

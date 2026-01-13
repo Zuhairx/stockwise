@@ -5,6 +5,9 @@ import com.stockwise.model.Transaction;
 import com.stockwise.repository.ProductRepository;
 import com.stockwise.repository.TransactionRepository;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public class TransactionService {
@@ -109,7 +112,9 @@ public class TransactionService {
         int finalNewStock = currentStockForNew + newStockAdjustment;
         productRepo.updateStock(newProduct.getId(), finalNewStock);
 
-        transactionRepo.insertOrUpdateWithId(transactionId, newProductId, newType, newQty, oldTransaction.getDate());
+        ZonedDateTime jakartaNow = ZonedDateTime.now(ZoneId.of("Asia/Jakarta"));
+        LocalDateTime jakartaDate = jakartaNow.toLocalDateTime();
+        transactionRepo.insertOrUpdateWithId(transactionId, newProductId, newType, newQty, jakartaDate);
 
         return true;
     }

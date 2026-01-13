@@ -1,6 +1,6 @@
-# TODO: Implement Product Search by ID, Name, and Category
+# TODO: Update Date Column in Transaction Table View on Update
 
-## Tasks
-- [x] Update prompt text in product.fxml to "Search by ID, Name, or Category..."
-- [x] Modify search filter logic in ProductController.java to include ID, Name, and Category
-- [ ] Test the updated search functionality
+## Steps to Complete:
+- [x] Add necessary imports for date handling in TransactionService.java (LocalDateTime, ZoneId, ZonedDateTime)
+- [x] Modify updateTransaction method in TransactionService.java to generate current Jakarta time and use it instead of oldTransaction.getDate()
+- [x] Test the changes to ensure date updates correctly in the table view
