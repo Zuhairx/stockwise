@@ -17,8 +17,9 @@
 3. Pastikan koneksi database sudah dikonfigurasi dengan benar (lihat `DBConnection.java`)
 
 ### 3. Menjalankan Aplikasi
-- **Via Batch File**: Jalankan `run.bat` (untuk Windows)
-- **Via Terminal**: `mvn clean install mvn clean javafx:run`
+- **Windows**: Jalankan `run.bat`
+- **macOS/Linux**: Jalankan `./run.sh` (atau `bash run.sh`)
+- **Via Terminal (semua OS)**: `mvn clean javafx:run`
 - **Via Maven**: `mvn clean compile exec:java`
 
 ## Panduan Penggunaan
